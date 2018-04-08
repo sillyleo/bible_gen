@@ -12,31 +12,31 @@ import {
   Text,
   View,
   FlatList,
+  SectionList,
   ScrollView
 } from 'react-native';
+// import data from './src/genesis.json';
 import data from './src/genesis.json';
 
 export default class App extends Component {
-  state = {
-    data: [],
-  };
+
   
   render() {
 
-    const chapter = data[0]
-    // console.log(chapter.book_name);
-    const chapterArray = Object.keys(chapter).map(key => chapter[key])
-    console.log(chapterArray);
+    const chapter = data[0].book[1].chapter_nr
     
     const verse = data[0].book[1].chapter;
     const verseArray = Object.keys(verse).map(key => verse[key])
 
-    return (
 
+
+
+
+    return (
 
       <SafeAreaView>
       <ScrollView>
-        <Text> {chapterArray[2]}  {chapterArray[3]} </Text>
+        <Text> {chapter} </Text>
         <FlatList
           data={verseArray}
           keyExtractor={() => Math.random().toString(36).substr(2, 9)}
@@ -44,6 +44,7 @@ export default class App extends Component {
             const { verse, verse_nr } = item
           return <Text>{verse_nr}{verse}</Text>}}
         />
+
 
       </ScrollView>
       </SafeAreaView>
