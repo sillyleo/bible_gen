@@ -1,0 +1,3 @@
+rootProject.name = 'bible_gen'
+
+include ':app'
