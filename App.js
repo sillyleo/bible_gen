@@ -21,11 +21,8 @@ export default class App extends Component {
     data: [],
   };
   
-
-  
-  
-  
   render() {
+
     const verse = data[0].book[1].chapter;
     const verseArray = Object.keys(verse).map(key => verse[key])
 
@@ -34,7 +31,7 @@ export default class App extends Component {
     return (
 
 
-
+      <SafeAreaView>
       <ScrollView>
 
         <FlatList
@@ -46,6 +43,7 @@ export default class App extends Component {
         />
 
       </ScrollView>
+      </SafeAreaView>
     );
   }
 }
