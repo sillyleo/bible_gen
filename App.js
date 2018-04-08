@@ -23,17 +23,20 @@ export default class App extends Component {
   
   render() {
 
+    const chapter = data[0]
+    // console.log(chapter.book_name);
+    const chapterArray = Object.keys(chapter).map(key => chapter[key])
+    console.log(chapterArray);
+    
     const verse = data[0].book[1].chapter;
     const verseArray = Object.keys(verse).map(key => verse[key])
-
-    // console.log(verse[1].verse);
 
     return (
 
 
       <SafeAreaView>
       <ScrollView>
-
+        <Text> {chapterArray[2]}  {chapterArray[3]} </Text>
         <FlatList
           data={verseArray}
           keyExtractor={() => Math.random().toString(36).substr(2, 9)}
