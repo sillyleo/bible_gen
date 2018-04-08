@@ -12,6 +12,7 @@ import {
   Text,
   View,
   FlatList,
+  ScrollView
 } from 'react-native';
 import data from './src/genesis.json';
 
@@ -25,33 +26,32 @@ export default class App extends Component {
   
   
   render() {
-    console.log(data[0].book[1].chapter);
     const verse = data[0].book[1].chapter;
-    console.log(verse[1].verse);
+    const verseArray = Object.keys(verse).map(key => verse[key])
+
+    // console.log(verse[1].verse);
 
     return (
-      <View style={styles.container}>
-        <Text>{verse[1].verse}</Text>
-      </View>
+
+
+
+      <ScrollView>
+
+        <FlatList
+          data={verseArray}
+          keyExtractor={() => Math.random().toString(36).substr(2, 9)}
+          renderItem={({item}) => {
+            const { verse, verse_nr } = item
+          return <Text>{verse_nr}{verse}</Text>}}
+        />
+
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
   },
 });
