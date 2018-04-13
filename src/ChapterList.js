@@ -12,24 +12,28 @@ class ChapterList extends Component {
         {chapters.map(unit => <Chapter
           chapter_nr={unit.chapter_nr}
           chapter={unit.chapter}
-          key={() => Math.random().toString(6).substr(2, 3)}/>)}
-        <Chapter/>
+          key={unit.chapter_nr}
+        />)}
       </View>
     );
   }
 }
 
 const Chapter = (props) => {
-  const propsArray = Object.values(props)
+  const verseArray = Object.values(props.chapter)
+  const chapterArray = props.chapter_nr
 
-  // console.log(props);
+  console.log(chapterArray);
   return (
     <View>
 
-      <Text>{props.chapter_nr}</Text>
-      {chapters.map(unit => <Verses
-        chapter_nr={unit.chapter_nr}
-        chapter={unit.chapter}/>)}
+      {/* <Text>{props.chapter_nr}</Text> */}
+
+      {verseArray.map(unit =>
+        <Text>
+        {props.chapter_nr}:{unit.verse_nr}{unit.verse}
+        </Text>)
+      }
 
     </View>
   );
@@ -40,11 +44,11 @@ const Verses = (props) => {
   const propsArray = Object.values(props.chapter)
   // console.log(propsArray);
   return (
-    <Text>
-      {propsArray.map(unit => <Verse
-        verse_nr={unit.verse_nr}
-        verse={unit.verse}/>)}
-    </Text>
+    <Text>verse</Text>
+      // {propsArray.map(unit => <Verse
+      //   key={unit.verse_nr}
+      //   verse_nr={unit.verse_nr}
+      //   verse={unit.verse}/>)}
   );
 }
 
