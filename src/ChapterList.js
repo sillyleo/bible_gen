@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import data from './genesis.json';
 import list from './list.json';
+import {simplify} from 'simplifr';
+import flatten from 'flat';
 
 const chapters = Object.values(data[0].book)
 
@@ -23,14 +25,14 @@ const Chapter = (props) => {
   const verseArray = Object.values(props.chapter)
   const chapterArray = props.chapter_nr
 
-  console.log(chapterArray);
+  // console.log(chapterArray);
   return (
     <View>
 
       {/* <Text>{props.chapter_nr}</Text> */}
 
       {verseArray.map(unit =>
-        <Text>
+        <Text key={unit.verse_nr}>
         {props.chapter_nr}:{unit.verse_nr}{unit.verse}
         </Text>)
       }
