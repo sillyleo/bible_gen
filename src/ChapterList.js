@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
-import data from './genesis.json';
+import {View, Text, FlatList, SectionList} from 'react-native';
+import data from './gen1.json';
 import list from './list.json';
 import {simplify} from 'simplifr';
 import flatten from 'flat';
@@ -8,60 +8,63 @@ import flatten from 'flat';
 const chapters = Object.values(data[0].book)
 
 class ChapterList extends Component {
+
   render() {
+    console.log(chapters);
+  
     return (
       <View>
-        {chapters.map(unit => <Chapter
-          chapter_nr={unit.chapter_nr}
-          chapter={unit.chapter}
-          key={unit.chapter_nr}
-        />)}
+        {chapters.map(unit =>
+          <Text
+            key={unit.chapter_nr}>
+            {unit.chapter_nr}
+            <ChapterSection
+              // title={unit.chapter.chapter_nr}
+              data={unit.chapter}
+            />
+          </Text>
+        )}
       </View>
     );
   }
 }
 
-const Chapter = (props) => {
-  const verseArray = Object.values(props.chapter)
-  const chapterArray = props.chapter_nr
-
-  // console.log(chapterArray);
+const ChapterText = (props) => {
+  const propsArray = Object.values(props.data)
+  // console.log(props)
   return (
+    <Text>
+    {propsArray.map(unit => <Text key={unit.verse_nr}>{unit.verse_nr}{unit.verse}</Text>)}
+    </Text>
+  );
+};
+const ChapterSection = (props) => {
+  const propsArray = Object.values(props.data)
+  // console.log(propsArray)
+  const flattenProps = flatten(props)
+  console.log(flattenProps)
+  return (
+    // <View>
+    // {propsArray.map(unit => 
+    //   <FlatList
+    //     data={unit.verse}
+    //     key={unit.verse_nr}
+    //   />
+    // )}
+    // </View>
     <View>
-
-      {/* <Text>{props.chapter_nr}</Text> */}
-
-      {verseArray.map(unit =>
-        <Text key={unit.verse_nr}>
-        {props.chapter_nr}:{unit.verse_nr}{unit.verse}
-        </Text>)
-      }
-
+      {/* <Text>{flattenProps.title}</Text> */}
+      <FlatList
+        data={propsArray}
+        renderItem={({item}) => <Text>{item.verse}</Text>}
+      />
     </View>
+   
+    // <Text>
+    // {propsArray.map(unit => <Text key={unit.verse_nr}>{unit.verse}</Text>)}
+    // </Text>
   );
 };
 
-const Verses = (props) => {
-
-  const propsArray = Object.values(props.chapter)
-  // console.log(propsArray);
-  return (
-    <Text>verse</Text>
-      // {propsArray.map(unit => <Verse
-      //   key={unit.verse_nr}
-      //   verse_nr={unit.verse_nr}
-      //   verse={unit.verse}/>)}
-  );
-}
-
-const Verse = (props) => {
-
-  // console.log(props.verse[0]); const propsArray = Object.values(props.chapter)
-  return (
-    <Text>
-      {props.verse}
-    </Text>
-  );
-}
 
 export default ChapterList;
