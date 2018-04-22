@@ -88,7 +88,7 @@ const ChapterSection = (props) => {
   // console.log(propsArray)
   const flattenProps = flatten(props)
   // console.log(flattenProps)
-  console.log(props.chapter_nr)
+  // console.log(props.chapter_nr)
   return (
 
     <View key={props.chapter_nr}>

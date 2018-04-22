@@ -10,10 +10,19 @@ import ChapterList from './src/ChapterList';
 
 
 export default class App extends Component {
-  scrollEnd = () => {
-    console.log('ended')
+  scrollEnd = (event) => {
+    // console.log('ended')
+    // console.log(this.refs.myScrollView.scrollProperties.offset);
     // console.log(event.nativeEvent.contentOffset.y);
+    const scrollPosision = event.nativeEvent.contentOffset.y
+    this.setState({scrollPosision: scrollPosision})
+    console.log(this.state)
   };
+
+  state = {
+    scrollPosision: 0
+  }
+
   render() {
     return (
       <SafeAreaView>
