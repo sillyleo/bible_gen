@@ -33,7 +33,6 @@ class ChapterList extends Component {
           {chapters.map(unit =>
             <Text
               key={unit.chapter_nr}>
-              
               <View><Text>Chapter {unit.chapter_nr}</Text></View>
               <View>
                 <ChapterText
@@ -53,6 +52,7 @@ class ChapterList extends Component {
       <View>
         {chapters.map(unit =>
           <ChapterSection
+            key={unit.chapter_nr}
             chapter_nr={unit.chapter_nr}
             data={unit.chapter}
           />
@@ -90,22 +90,15 @@ const ChapterSection = (props) => {
   // console.log(flattenProps)
   console.log(props.chapter_nr)
   return (
-    // <View>
-    // {propsArray.map(unit => 
-    //   <FlatList
-    //     data={unit.verse}
-    //     key={unit.verse_nr}
-    //   />
-    // )}
-    // </View>
 
-    <View>
-      <Text>{props.chapter_nr}</Text>
+    <View key={props.chapter_nr}>
+      <Text key={props.chapter_nr}>{props.chapter_nr}</Text>
       <FlatList
+        // contentInset={{top: 20, left: 20, bottom: 20, right: 20}}
         data={propsArray}
         // horizontal={true}
         ListHeaderComponent={this.renderHeader}
-        key={props.verse_nr}
+        keyExtractor={() => Math.random().toString(36).substr(2, 9)}
         renderItem={({item}) => <Text>{item.verse_nr}{item.verse}</Text>}
       />
     </View>
