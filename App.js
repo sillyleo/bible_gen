@@ -18,15 +18,30 @@ export default class App extends Component {
     this.setState({scrollPosision: scrollPosision})
     console.log(this.state)
   };
+  scroll500 = (event) => {
+    // console.log('ended')
+    // console.log(this.refs.myScrollView.scrollProperties.offset);
+    // console.log(event.nativeEvent.contentOffset.y);
+    this.scrollView.scrollTo({ y: 500, animated: true });
+  };
 
   state = {
     scrollPosision: 0
   }
 
+  refScrollView = (scrollView) => {
+    this.scrollView = scrollView;
+  }
+
+
   render() {
     return (
       <SafeAreaView>
-      <ScrollView onMomentumScrollEnd={this.scrollEnd}>
+      <ScrollView
+        ref={this.refScrollView}
+        // onMomentumScrollEnd={this.scrollEnd}
+        onMomentumScrollEnd={this.scroll500}
+      >
         <ChapterList />
       </ScrollView>
       </SafeAreaView>
